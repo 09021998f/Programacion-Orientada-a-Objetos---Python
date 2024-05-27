@@ -1,0 +1,4 @@
+
+
+class FueraDeIndice(Exception):
+    pass
