@@ -27,3 +27,22 @@ class Gas(Calefactor):
 
     def get_calorias(self):
         return self.__calorias
+    
+    def get_cuotas(self):
+        return super().get_cuotas()
+    
+    def toJson(self):
+        d = dict(
+                     tipo = self.__class__.__name__,
+                     marca = self.get_marca(),
+                     modelo = self.get_modelo(),
+                     pais_de_fabricacion = self.get_paisDeFabricacion(),
+                     precio_de_lista = self.get_precio(),
+                     forma_de_pago = self.get_formaDePago(),
+                     cant_cuotas = self.get_cuotas(),
+                     promocion = self.get_promocion(),
+                     matricula=self.__matricula,
+                     calorias = self.__calorias
+                     
+                 )
+        return d

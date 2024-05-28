@@ -15,13 +15,13 @@ class Manejador:
         with open('calefactores.json', encoding= 'utf-8') as archi:
             data = json.load(archi)
         for calefa in data['calefactores']:
-            if calefa['tipo'] == 'gas':
+            if calefa['tipo'] == 'Gas':
                 gas = Gas(calefa['marca'], calefa['modelo'], calefa['pais_de_fabricacion'], calefa['precio_de_lista'], calefa['forma_de_pago'] ,calefa['cant_cuotas'], calefa['promocion'], calefa['matricula'], calefa['calorias'])
                 self.__lista.agregarCalefactores(gas) 
             else:
                 elec = Electrico(calefa['marca'], calefa['modelo'], calefa['pais_de_fabricacion'], calefa['precio_de_lista'], calefa['forma_de_pago'] ,calefa['cant_cuotas'], calefa['promocion'], calefa['potencia_max'])
                 self.__lista.agregarCalefactores(elec)
-
+        archi.close()
     def __str__(self):
         s = ''
         for dato in self.__lista:
@@ -38,17 +38,17 @@ class Manejador:
                 marca = input('Marca: ')
                 mod = input('Modelo: ')
                 pais = input('Pais: ')
-                precio = input('Precio: ')
+                precio = int(input('Precio: '))
                 metodo = input('Metodo de pago: ')
-                cuotas = input('Cantidad de cuotas: ')
-                prom = input('Promocion (Si/No): ')
+                cuotas = int(input('Cantidad de cuotas: '))
+                prom = int(input('Promocion (Si/No): '))
                 if prom.lower() == 'si':
                     promo = True
                 elif prom.lower() == 'no':
                     promo = False
                 else:
                     print('Error! escriba si o no ')
-                potencia = input('Potencia: ')
+                potencia = int(input('Potencia: '))
                 elec = Electrico(marca,mod,pais,precio,metodo,cuotas,promo,potencia)
                 self.__lista.insertarElemento1(elec,pos-1)
                 
@@ -56,9 +56,9 @@ class Manejador:
                 marca = input('Marca: ')
                 mod = input('Modelo: ')
                 pais = input('Pais: ')
-                precio = input('Precio: ')
+                precio = int(input('Precio: '))
                 metodo = input('Metodo de pago: ')
-                cuotas = input('Cantidad de cuotas: ')
+                cuotas = int(input('Cantidad de cuotas: '))
                 prom = input('Promocion (Si/No): ')
                 if prom.lower() == 'si':
                     promo = True
@@ -67,7 +67,7 @@ class Manejador:
                 else:
                     print('Error! escriba si o no ')
                 matricula = input('Matricula: ')
-                cal = input('Calorias: ')
+                cal = int(input('Calorias: '))
                 gas = Gas(marca,mod,pais,precio,metodo,cuotas,promo,matricula,cal)
                 self.__lista.insertarElemento1(gas, pos-1)
             else:
@@ -163,22 +163,17 @@ class Manejador:
     '''Punto 6'''
     
     def mostrarCalefPromocion(self):
-        precioFinal = 0
+        print('CALEFACTORES EN PROMOCION!!!')
         for dato in self.__lista:
             if isinstance(dato,Electrico):
                 if dato.get_promocion() == True:
                     self.calcularImporteFinal(dato,'electrico')
-                else:
-                    print(f'|Marca:{dato.get_marca()} |Modelo: {dato.get_modelo()} |Importe: {dato.get_precio()}')
+                
             if isinstance(dato,Gas):
                 if dato.get_promocion() == True:
                     self.calcularImporteFinal(dato, 'gas')
-                else:
-                    print(f'|Marca:{dato.get_marca()} |Modelo: {dato.get_modelo()} |Importe: {dato.get_precio()}')
                 
-             
-            
-                         
+    
     def calcularImporteFinal(self, dato,tipo):
         precioFinal = 0
         if tipo == 'electrico':
@@ -196,8 +191,18 @@ class Manejador:
             if dato.get_formaDePago() == 'cuotas':
                 precioFinal = precioFinal * (1+0.40)
             print(f'|Marca:{dato.get_marca()} |Modelo: {dato.get_modelo()} |Importe: {precioFinal}')
+    '''Punto 7''' 
+    def toJson(self):
+        d = dict(
+            calefactores=[dato.toJson() for dato in self.__lista]
+        )
+        return d    
         
-                
+    def guardarEnJson(self,diccionario):
+        with open('calefactores.json', 'w', encoding= 'utf-8') as archi:
+            json.dump(diccionario,archi,indent=4)
+        print('Cargado')
+        # print(diccionario)        
                 
                 
                 

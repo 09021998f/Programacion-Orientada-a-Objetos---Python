@@ -30,4 +30,7 @@ class Calefactor:
     
     def get_formaDePago(self):
         return self.__formaDePago
+    
+    def get_cuotas(self):
+        return self.__cuotas
         
