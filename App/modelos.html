@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+            <th>Nro</th>
+            <th>Localidad</th>
+            <th>Direccion</th>    
+        </tr>
+        
+    </thead>
+        <tbody>
+            
+            {%for dato in sucursales%}
+            <tr>
+                <td>
+                    {{dato.id}}
+                </td>
+                <td>
+                    {{dato.localidad}}
+                </td>
+                <td>
+                    {{dato.direccion}}
+                </td>
+            {%endfor%}
+            </tr>
+        </tbody>
+    </table>

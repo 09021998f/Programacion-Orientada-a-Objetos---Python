@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Repartidores{% endblock %}
+{% block content %}
+<h1>Repartidores</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Número</th>
+        <th>Nombre</th>
+        <th>DNI</th>
+        <th>ID Sucursal</th>
+    </tr>
+    {% for repartidor in repartidores %}
+    <tr>
+        <td>{{ repartidor.id }}</td>
+        <td>{{ repartidor.num }}</td>
+        <td>{{ repartidor.nombre }}</td>
+        <td>{{ repartidor.dni }}</td>
+        <td>{{ repartidor.id_sucursal }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

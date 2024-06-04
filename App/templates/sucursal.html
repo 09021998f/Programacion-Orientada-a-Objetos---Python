@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Sucursales{% endblock %}
+{% block content %}
+<h1>Sucursal: {{sucursales.numero}} </h1>
+
+
+<table>
+    <tr>
+        
+        <th>Número</th>
+        <th>Provincia</th>
+        <th>Localidad</th>
+        
+    </tr>
+    
+    <tr>
+        
+        <td>{{ sucursales.numero }}</td>
+        <td>{{ sucursales.provincia }}</td>
+        <td>{{ sucursales.localidad }}</td>
+        
+    </tr>
+</table>
+
+<ul>
+    
+    <li><a href="/">Regisrar Pedido</a></li>
+
+</ul>
+{% endblock %}

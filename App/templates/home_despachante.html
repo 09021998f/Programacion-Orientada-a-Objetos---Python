@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Despachante{% endblock %}
+{% block content %}
+    <div>
+        <h1>Home</h1>
+        <p>Bienvenido Despachante</p>
+    </div>
+    <div>
+        <h2>Sucursales</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nro</th>
+                    <th>Localidad</th>
+                    <th>Direccion</th>    
+                </tr>
+                
+            </thead>
+                <tbody>
+                    
+                    {%for dato in sucursales%}
+                    <tr>
+                        <td>
+                            {{dato.id}}
+                        </td>
+                        <td>
+                            {{dato.localidad}}
+                        </td>
+                        <td>
+                            {{dato.direccion}}
+                        </td>
+                    {%endfor%}
+                    </tr>
+                </tbody>
+            </table>
+
+        
+
+        <form action="{{request.path}}", method="post">
+            <laber for = 'sucursal'>Seleccion una sucursal</label>
+            <select name="sucursal">
+                {% for sucursal in sucursales %}
+                    <option value="{{sucursal.id}}">{{sucursal.id}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Seleccionar">
+        </form>
+    </div>
+{% endblock %}

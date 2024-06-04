@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Transportes{% endblock %}
+{% block content %}
+<h1>Transportes</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Número de Transporte</th>
+        <th>Fecha y Hora de Salida</th>
+        <th>Fecha y Hora de Llegada</th>
+        <th>ID Sucursal</th>
+    </tr>
+    {% for transporte in transportes %}
+    <tr>
+        <td>{{ transporte.id }}</td>
+        <td>{{ transporte.numeroTrans }}</td>
+        <td>{{ transporte.fechaHoraSalida }}</td>
+        <td>{{ transporte.fechaHoraLleg }}</td>
+        <td>{{ transporte.id_sucursal }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
