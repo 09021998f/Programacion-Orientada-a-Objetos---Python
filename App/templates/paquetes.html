@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Paquetes{% endblock %}
+{% block content %}
+<h1>Paquetes</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Número de Envío</th>
+        <th>Peso</th>
+        <th>Nombre del Destinatario</th>
+        <th>Dirección del Destinatario</th>
+        <th>Entregado</th>
+        <th>Observaciones</th>
+        <th>ID Sucursal</th>
+        <th>ID Transporte</th>
+        <th>ID Repartidor</th>
+    </tr>
+    {% for paquete in paquetes %}
+    <tr>
+        <td>{{ paquete.id }}</td>
+        <td>{{ paquete.numEnvio }}</td>
+        <td>{{ paquete.peso }}</td>
+        <td>{{ paquete.nomDest }}</td>
+        <td>{{ paquete.dirDest }}</td>
+        <td>{{ paquete.entregado }}</td>
+        <td>{{ paquete.observaciones }}</td>
+        <td>{{ paquete.id_sucursal }}</td>
+        <td>{{ paquete.id_transporte }}</td>
+        <td>{{ paquete.id_repartidor }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

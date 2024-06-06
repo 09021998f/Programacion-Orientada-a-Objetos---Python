@@ -1,0 +1,26 @@
+<h1> Datos </h1>
+
+<div class="container">
+    <table>
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Provincia</th>
+                    <th>Localidad</th>
+                    <th>Localidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for dato in datos%}
+                <tr>
+                    <td>{{dato.numero}}</td>
+                    <td>{{dato.provincia}}</td>
+                    <td>{{dato.localidad}}</td>
+                    <td>{{dato.direccion}}</td>
+                                        
+                    
+                </tr>
+                {%endfor%}
+            </tbody>
+    </table>
+</div>
