@@ -9,7 +9,7 @@ class GestorJugadores:
 
 
     def cargarJugadores(self):
-        with open('puntos.json') as archi:
+        with open('pysimonpuntajes.json') as archi:
             data = json.load(archi)
         for jug in data['jugadores']:
             self.agregarJugador(Jugador(jug['jugador'],jug['fecha'], jug['hora'], jug['puntaje']))
@@ -20,6 +20,10 @@ class GestorJugadores:
             s += str(jug) + '\n'
         return s
     
+    def get_jugadores(self):
+        return self.__jugadores
+        
+    
     def toJson(self):
         d = dict(
             jugadores = [jug.toJson() for jug in self.__jugadores]
@@ -28,7 +32,7 @@ class GestorJugadores:
 
     def guardarJSONArchivo(self, dic):
         
-        with open('puntos.json', 'w') as archi:
+        with open('pysimonpuntajes.json', 'w') as archi:
             json.dump(dic, archi,indent=4)
             
     

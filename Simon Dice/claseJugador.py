@@ -31,4 +31,6 @@ class Jugador:
     def getPuntaje(self):
         return self.__puntaje
     
+    def __gt__(self,otro):
+        return self.__puntaje < otro.__puntaje
     

@@ -5,18 +5,30 @@ from claseGestorJugadores import GestorJugadores
 import tkinter as tk
 import time, random 
 import datetime
+from galeriaPuntajes import *
 
 class Aplicacion():
     def __init__(self):
 
         #   Configuraciones de la ventana
+        super().__init__()
         self.__ventana =tk.Tk()
         self.__ventana.title('Simon dice')
         self.__ventana.geometry('250x450')
         self.__ventana.configure()
         self.__ventana.resizable(0,0)
         self.colores = ["#006400", "#8B0000", "#CCCC00", "#00008B"]
+        # Barra menu
+        barraMenu = Menu(self.__ventana)
+        self.__ventana.config(menu = barraMenu)
         
+        menuPuntaje = Menu(barraMenu, tearoff=0)
+        barraMenu.add_cascade(label='Puntajes', menu = menuPuntaje)
+        menuPuntaje.add_command(label='Galeria de Puntajes', command=self.galeria_puntaje)
+        menuPuntaje.add_command(label='Salir', command=self.salir_aplicacion)
+        
+        
+         
         #   Datos jugador
         self.__jugador = None
         self.__fecha = None
@@ -159,6 +171,35 @@ class Aplicacion():
         self.__gestor.guardarJSONArchivo(datos)
         self.__ventana.destroy()
 
+    def galeria_puntaje(self):
+        galeria = Toplevel()
+        galeria.resizable(0,0)
+        galeria.title('Galeria de Puntajes')
+        frame = ttk.Frame(galeria)
+        frame.pack(padx=10, pady=10)
+        tree = ttk.Treeview(frame, columns=('Jugador', 'Fecha', 'Hora', 'Puntaje'), show='headings', height=5)
+        
+        tree.heading("Jugador", text="Jugador")
+        tree.heading("Fecha", text="Fecha")
+        tree.heading("Hora", text="Hora")
+        tree.heading("Puntaje", text="Puntaje")        
+        
+        tree.column("Jugador", width=100)
+        tree.column("Fecha", width=100)
+        tree.column("Hora", width=100)
+        tree.column("Puntaje", width=100)
+        
+        jugadores = self.__gestor.get_jugadores()
+        jugadores.sort()
+        for jugador in jugadores:
+            tree.insert("", tk.END, values=(jugador.getJugador(), jugador.getFecha(), jugador.getHora(), jugador.getPuntaje()))
+            
+        tree.pack()
+        boton_salir = ttk.Button(galeria, text="Cerrar", command=quit)
+        boton_salir.pack(pady=10)
+        
+        galeria.mainloop()
+        
 if __name__ == '__main__':
     app = Aplicacion()
     
